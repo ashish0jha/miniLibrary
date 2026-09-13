@@ -1,4 +1,4 @@
-import { type Request, type Response } from "express";
+import { type Request, type RequestParamHandler, type Response } from "express";
 import pgClinet from "../config/db.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
@@ -73,5 +73,19 @@ export async function loginHandler(req: Request, res: Response) {
 
   } catch (err) {
     res.status(400).json({ error: (err as Error).message });
+  }
+}
+
+export function getmeHandler(req:Request,res:Response) {
+  res.json({msg:"Your Profile",data:req.user});
+}
+
+export function logoutHandler(req:Request,res:Response) {
+  try{
+    res.cookie("token","",{expires:new Date(Date.now())});
+    res.json({msg:"Logout Successfully"});
+  }
+  catch(err) {
+    res.status(400).json({error:(err as Error).message});
   }
 }
