@@ -14,3 +14,16 @@ export function validateSignUpData(req:Request) {
         throw new Error("Password is too weak");
     }
 }
+
+export function validateLoginData(req:Request) {
+    const {username,email,password} = req.body;
+    if(username.length > 25 || email.length > 256 || password.length > 25) {
+        throw new Error("Credential(s) is/are too long");
+    }
+    if(!username && !email) {
+        throw new Error("Email/username is required")
+    }
+    if(validator.isStrongPassword(password) === false) {
+        throw new Error("Password is too weak");
+    }
+}
