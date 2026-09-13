@@ -20,7 +20,7 @@ export async function userAuth(req:Request,res:Response,next:NextFunction) {
         }
         const username = decoded.username;
        
-        const result = await pgClinet.query(`SELECT id,username,email,created_at FROM users WHERE username = $1`,[username]);
+        const result = await pgClinet.query(`SELECT id,username,email,role,created_at FROM users WHERE username = $1`,[username]);
         if(result.rows.length === 0) {
             throw new Error("User is Not Registered Yet");
         }
@@ -31,5 +31,14 @@ export async function userAuth(req:Request,res:Response,next:NextFunction) {
     }
     catch(err) {
         res.status(400).json({error:(err as Error).message})
+    }
+}
+
+export function requireRole(role : 'student' | 'admin') {
+    return (req:Request,res:Response,next:NextFunction) => {
+        if(req.user?.role != role) {
+            res.status(403).json({msg:"Access forbidden"})
+        }
+        next();
     }
 }

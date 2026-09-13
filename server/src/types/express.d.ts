@@ -5,6 +5,7 @@ declare global {
                 id:Number;
                 username:string;
                 email:string;
+                role:string;
                 created_at:Date;
             }
         }
