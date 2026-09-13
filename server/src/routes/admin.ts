@@ -1,9 +1,10 @@
 import express from 'express';
-import { addBooksHandler } from '../controller/admin.js';
+import { addBooksHandler, removeBookHandler } from '../controller/admin.js';
 import { requireRole, userAuth } from '../middleware/auth.js';
 
 const adminrouter = express.Router();
 
 adminrouter.post("/addBooks",userAuth, requireRole('admin'), addBooksHandler);
+adminrouter.post("/removeBooks",userAuth, requireRole('admin'), removeBookHandler);
 
 export default adminrouter;

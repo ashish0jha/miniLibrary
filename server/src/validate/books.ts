@@ -1,6 +1,5 @@
 import type { Request } from "express";
 
-
 export function validateBooksRegistration(req:Request) {
     const {title,author,total_copies,available_copies} = req.body;
 
@@ -12,5 +11,20 @@ export function validateBooksRegistration(req:Request) {
     }
     if(available_copies > total_copies) {
         throw new Error("Available Copies must be less than Total Copies");
+    }
+}
+
+export function validateBooksRemoval(req:Request) {
+    if(!req.body) {
+        throw new Error("Enter both title and author")
+    }
+
+    const {title,author} = req.body;
+
+    if(!title || !author) {
+        throw new Error("Enter both title and author");
+    }
+    if(title.length > 100 || author.length > 100) {
+        throw new Error("title/author is too long");
     }
 }
