@@ -6,6 +6,9 @@ export function validateBooksRegistration(req:Request) {
     if(title.length > 100 || author.length > 100) {
         throw new Error("Books/Author name is too long");
     }
+    if(total_copies === 0 || available_copies === 0) {
+        throw new Error("Initially, Can't Zero")
+    }
     if(!title || !author || !total_copies || !available_copies) {
         throw new Error('Every Field is Required');
     }

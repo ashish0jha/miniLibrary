@@ -1,5 +1,5 @@
 import express from 'express';
-import { addBooks, reduceBooks, RegisterBooksHandler, removeBookHandler } from '../controller/admin.js';
+import { addBooks, reduceBooks, RegisterBooksHandler, removeBookHandler } from '../controller/books.js';
 import { requireRole, userAuth } from '../middleware/auth.js';
 
 const adminrouter = express.Router();

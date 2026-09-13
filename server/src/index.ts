@@ -3,7 +3,8 @@ import "dotenv/config"
 import pgClinet from './config/db.js';
 import cookieParser from 'cookie-parser';
 import authRouter from './routes/auth.js';
-import adminrouter from './routes/admin.js';
+import adminrouter from './routes/books.js';
+import BorrowReturnRouter from './routes/borrowReturn.js';
 
 const app = express();
 app.use(express.json());
@@ -11,6 +12,7 @@ app.use(cookieParser());
 
 app.use("/",authRouter);
 app.use("/admin",adminrouter);
+app.use("/",BorrowReturnRouter);
 
 pgClinet.connect()
 .then(()=>{
