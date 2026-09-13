@@ -9,14 +9,14 @@ export function validateBooksRegistration(req:Request) {
     if(!title || !author || !total_copies || !available_copies) {
         throw new Error('Every Field is Required');
     }
-    if(available_copies > total_copies) {
-        throw new Error("Available Copies must be less than Total Copies");
+    if(available_copies !== total_copies) {
+        throw new Error("Available Copies must be equal to Total Copies,Initially");
     }
 }
 
-export function validateBooksRemoval(req:Request) {
+export function validateBooksTitleAndAuthor(req:Request) {
     if(!req.body) {
-        throw new Error("Enter both title and author")
+        throw new Error("Fill Entries")
     }
 
     const {title,author} = req.body;
