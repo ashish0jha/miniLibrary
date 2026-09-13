@@ -1,5 +1,7 @@
-import { Client } from "pg";
+import { Pool } from "pg";
 
-const pgClinet = new Client(process.env.DB_LINK);
+const pgClinet = new Pool({
+    connectionString:process.env.DB_LINK,
+});
 
 export default pgClinet;
