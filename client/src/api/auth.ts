@@ -8,7 +8,7 @@ export async function signup(username:string,email:string,password:string) {
     return res.data;
 }
 
-export async function login(username:string,email:string,password:string) {
+export async function login(username?:string,email?:string,password?:string) {
     const res = await apiClient.post<ApiSuccess<User>>('/login',{
         username,email,password
     })
