@@ -12,7 +12,6 @@ export async function borrowed() {
 }
 
 export async function search(key:'title' | 'author' , searchContent:string) {
-    const res = await apiClient.get<ApiSuccess<Book[]>>(`/search/${key}/${searchContent}`);
-
+    const res = await apiClient.get<ApiSuccess<Book[]>>(`/search/${key}/${encodeURIComponent(searchContent)}`);
     return res.data;
 }
