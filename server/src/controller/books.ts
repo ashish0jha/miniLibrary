@@ -15,7 +15,7 @@ export async function RegisterBooksHandler(req: Request, res: Response) {
       throw new Error("This lot is Already Registered");
     }
 
-    const insertQuery = `INSERT INTO books(title,author,total_copies,available_copies) VALUES($1,$2,$3,$4) RETURNING id,title,author`;
+    const insertQuery = `INSERT INTO books(title,author,total_copies,available_copies) VALUES($1,$2,$3,$4) RETURNING *`;
     const insertResult = await pgClinet.query(insertQuery, [
       title,
       author,
