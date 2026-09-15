@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.get("/leaderboard",userAuth,leaderboardHandler);
 router.get("/borrowed",userAuth,totalBorrowesBystudentHandler);
-router.get('/search/:key',userAuth,searchHandler);
+router.get('/search/:key/:searchContent',userAuth,searchHandler);
 
 export default router;

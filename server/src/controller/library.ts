@@ -31,8 +31,7 @@ export async function totalBorrowesBystudentHandler(req:Request,res:Response) {
 
 export async function searchHandler(req:Request,res:Response) {
     try{
-        const {key} = req.params;
-        const {searchContent} = req.body;
+        const {key,searchContent} = req.params;
 
         if(!key || typeof key != "string") {
             throw new Error("key is not defined");

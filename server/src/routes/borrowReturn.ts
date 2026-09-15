@@ -4,7 +4,7 @@ import { borrowHandler, returnBookHandler } from "../controller/borrowReturn.js"
 
 const router = express.Router();
 
-router.get('/borrow',userAuth,borrowHandler);
-router.get('/return',userAuth,returnBookHandler);
+router.post('/borrow',userAuth,borrowHandler);
+router.patch('/return',userAuth,returnBookHandler);
 
 export default router;
