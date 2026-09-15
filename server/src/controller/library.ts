@@ -28,3 +28,30 @@ export async function totalBorrowesBystudentHandler(req:Request,res:Response) {
         res.status(500).json({error:(err as Error).message});
     }
 }
+
+export async function searchHandler(req:Request,res:Response) {
+    try{
+        const {key} = req.params;
+        const {searchContent} = req.body;
+
+        if(!key || typeof key != "string") {
+            throw new Error("key is not defined");
+        }
+
+        if(!["title","author"].includes(key)){
+            throw new Error("Only 'title' and 'author' are allowed as key ");
+        }
+
+        const query = `SELECT * FROM books WHERE ${key} LIKE $1`;
+        const result = await pgClinet.query(query,[`%${searchContent}%`]);
+
+        if(result.rows.length === 0) {
+            throw new Error(`${searchContent} is not in the Library Yet`);
+        }
+
+        res.json({msg:"search SuccessFul",data:result.rows});
+    }
+    catch(err) {
+        res.status(400).json({error:(err as Error).message})
+    }
+}
