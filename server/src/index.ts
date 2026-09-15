@@ -6,6 +6,7 @@ import authRouter from './routes/auth.js';
 import adminrouter from './routes/books.js';
 import BorrowReturnRouter from './routes/borrowReturn.js';
 import libraryRouter from './routes/library.js'
+import adminOnlyRouter from './routes/adminOnly.js';
 
 const app = express();
 app.use(express.json());
@@ -14,7 +15,8 @@ app.use(cookieParser());
 app.use("/",authRouter);
 app.use("/admin",adminrouter);
 app.use("/",BorrowReturnRouter);
-app.use("/",libraryRouter)
+app.use("/",libraryRouter);
+app.use("/",adminOnlyRouter)
 
 pgClinet.connect()
 .then(()=>{
